@@ -1,4 +1,6 @@
 <?php
+// include('selfcare/includes/headerSess.php');
+// $permissionrequired="public-digital"; include('selfcare/includes/permissionscheck.php');
 $time = microtime();
 $time = explode(' ', $time);
 $time = $time[1] + $time[0];
@@ -40,7 +42,7 @@ include "version.php";
   <body>
   <div class="page-header" style="position:relative;">
   <h1><small>P25Reflector-Dashboard by M0VUB for Reflector:</small>  <?php echo P25REFLECTORNAME; ?></h1>
-  <h4>P25Reflector by G4KLX. Version: 
+  <h4>P25Reflector by G4KLX Version: 
   <?php  echo getP25ReflectorVersion(); ?></h4>
   <?php
    $dir = "config/config.php";

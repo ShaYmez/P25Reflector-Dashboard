@@ -19,33 +19,33 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
     <title>P25Reflector-Dashboard by M0VUB - SETUP (Please delete after use!)</title>
   </head>
   <body>
+<?php
+	if ($_GET['cmd'] =="writeconfig") {
+		if (!file_exists('./config')) {
+		    if (!mkdir('./config', 0777, true)) {
+?>
+<div class="alert alert-danger" role="alert">You forgot to give write-permissions to your webserver-user!</div>
 
-  <?php
-  if ($_GET['cmd'] == "writeconfig") {
-      if (!file_exists('./config')) {
-          if (!mkdir('./config', 0777, true)) {
-              echo '<div class="alert alert-danger" role="alert">You forgot to give write permissions to your webserver user!</div>';
-          } else {
-              echo '<div class="alert alert-success" role="alert">Config directory created!</div>';
-          }
-      }
-      $configfile = fopen("config/config.php", 'w');
-      if ($configfile) {
-          fwrite($configfile, "<?php\n");
-          fwrite($configfile, "# This is an auto-generated config file!\n");
-          fwrite($configfile, "# Be careful, when manually editing this!\n\n");
-          fwrite($configfile, "date_default_timezone_set('UTC');\n");
-          fwrite($configfile, createConfigLines());
-          fwrite($configfile, "?>\n");
-          fclose($configfile);
-          echo '<div class="alert alert-success" role="alert">Your config file is written in config/config.php, please remove setup.php for security reasons!</div>';
-          echo '<p><a href="index.php">Your P25 dashboard is now available.</a></p>';
-      } else {
-          echo '<div class="alert alert-danger" role="alert">Failed to create config.php file!</div>';
-      }
-  } else {
-  ?>
-	  
+<?php
+		    }
+		}
+		$configfile = fopen("config/config.php", 'w');
+		fwrite($configfile,"<?php\n");
+		fwrite($configfile,"# This is an auto-generated config-file!\n");
+		fwrite($configfile,"# Be careful, when manual editing this!\n\n");
+		fwrite($configfile,"date_default_timezone_set('UTC');\n");
+		fwrite($configfile, createConfigLines());
+		fwrite($configfile,"?>\n");
+		fclose($configfile);
+?>
+  <div class="page-header">
+    <h1><small>P25Reflector-Dashboard by M0VUB</small> Setup-Procedure.</h1>
+    <div class="alert alert-success" role="alert">Your config-file is written in config/config.php, please remove setup.php for security reasons! You have been warned! M0VUB.</div>
+    <p><a href="index.php">Your NEW P25 dashboard is now available.</a></p>
+  </div>
+<?php
+	} else {
+?>
   <div class="page-header">
     <h1><small>P25Reflector-Dashboard by M0VUB</small> Setup-Procedure.</h1>
     <h4>Please give necessary information below</h4>
