@@ -17,7 +17,7 @@ Required are
 ============
 * Webserver like 
 * lighttpd or apache(2)
-* PHP 5 >= 5.5.0 Minimum
+* Updated to work with PHP 8.X >= 8.2.28
 
 Installation
 ============
