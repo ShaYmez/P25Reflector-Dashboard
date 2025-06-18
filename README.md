@@ -7,7 +7,7 @@ About
 P25Reflector-Dashboard is a web-dashboard for visualization of different data like
 system temperatur, cpu-load ... and it shows a last-heard-list.
 
-Must be running PhP ver 7.4
+PhP 8.X 
 
 It relies on P25Reflector by G4KLX (see https://github.com/g4klx/P25Clients). At 
 this place a big thank you to Jonathan for his great work he did with this 
@@ -15,8 +15,7 @@ software.
 
 Required are
 ============
-* Webserver like 
-* lighttpd or apache(2)
+* Webserver like lighttpd or apache(2)
 * Updated to work with PHP 8.X >= 8.2.28
 
 Installation
@@ -25,10 +24,10 @@ Installation
 * Copy all files into your webroot and enjoy working with it.
 * Create a config/config.php by calling setup.php and giving suitable values
 * If Dashboard is working, remove setup.php from your webroot
-* PhP 7.4
+* PhP 8.x
 
 For detailled installation see `linux-step-by-step.md` within this repository.
 
 Contact
 =======
-Feel free to contact the author via email: support@gb7nr.co.uk
+Feel free to contact the author by opening a request or issue on this reop.
