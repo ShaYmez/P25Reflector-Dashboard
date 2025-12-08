@@ -1,3 +1,3 @@
 <?php
-define("VERSION", "20250618-2");
+define("VERSION", "20251208-2");
 ?>
