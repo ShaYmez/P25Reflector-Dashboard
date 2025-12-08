@@ -48,14 +48,16 @@ function loadXMLDoc() {
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("txline").innerHTML=xmlhttp.responseText;
+		if (xmlhttp.readyState==4) {
+			if (xmlhttp.status==200) {
+				document.getElementById("txline").innerHTML=xmlhttp.responseText;
+			}
+			// Schedule next update after request completes (success or failure)
+			window.setTimeout(loadXMLDoc, 1000);
 		}
 	}
 	xmlhttp.open("GET","txinfo.php",true);
 	xmlhttp.send();
-
-	var timeout = window.setTimeout("loadXMLDoc()", 1000);
 }
 loadXMLDoc();
 </script>
