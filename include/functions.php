@@ -2,12 +2,14 @@
 function getP25ReflectorVersion() {
 	// returns creation-time of P25Reflector as version-number
 	$filename = P25REFLECTORPATH."/P25Reflector";
-	exec($filename." -v 2>&1", $output);
-	if (!startsWith(substr($output[0],21,8),"20")) {
+	$output = array();
+	exec(escapeshellarg($filename)." -v 2>&1", $output);
+	if (!empty($output) && !startsWith(substr($output[0],21,8),"20")) {
 		return getP25ReflectorFileVersion();
-	} else {
+	} else if (!empty($output)) {
 		return substr($output[0],21,8)." (compiled ".getP25ReflectorFileVersion().")";
 	}
+	return getP25ReflectorFileVersion();
 }
 
 
