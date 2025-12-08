@@ -7,7 +7,7 @@ function getP25ReflectorVersion() {
 		return getP25ReflectorFileVersion();
 	}
 	$output = array();
-	exec(escapeshellarg($filename)." -v 2>&1", $output);
+	exec($filename." -v 2>&1", $output);
 	if (!empty($output) && !startsWith(substr($output[0],21,8),"20")) {
 		return getP25ReflectorFileVersion();
 	} else if (!empty($output)) {
