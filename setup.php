@@ -20,7 +20,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
   </head>
   <body>
 <?php
-	if ($_GET['cmd'] =="writeconfig") {
+	if (isset($_GET['cmd']) && $_GET['cmd'] == "writeconfig") {
 		if (!file_exists('./config')) {
 		    if (!mkdir('./config', 0777, true)) {
 ?>
@@ -91,23 +91,26 @@ function get_tz_options($selectedzone, $label, $desc = '') {
     $i = 0;
     foreach($all AS $zone) {
       $zone = explode('/',$zone);
-      $zonen[$i]['continent'] = isset($zone[0]) ? $zone[0] : '';
-      $zonen[$i]['city'] = isset($zone[1]) ? $zone[1] : '';
-      $zonen[$i]['subcity'] = isset($zone[2]) ? $zone[2] : '';
+      $zonen[$i]['continent'] = $zone[0] ?? '';
+      $zonen[$i]['city'] = $zone[1] ?? '';
+      $zonen[$i]['subcity'] = $zone[2] ?? '';
       $i++;
     }
     asort($zonen);
     $structure = '';
+    $selectcontinent = '';
     foreach($zonen AS $zone) {
-      extract($zone);
+      $continent = $zone['continent'];
+      $city = $zone['city'];
+      $subcity = $zone['subcity'];
    //   if($continent == 'Africa' || $continent == 'America' || $continent == 'Antarctica' || $continent == 'Arctic' || $continent == 'Asia' || $continent == 'Atlantic' || $continent == 'Australia' || $continent == 'Europe' || $continent == 'Indian' || $continent == 'Pacific') {
-        if(!isset($selectcontinent)) {
+        if($selectcontinent === '') {
           $structure .= '<optgroup label="'.$continent.'">'; // continent
         } elseif($selectcontinent != $continent) {
           $structure .= '</optgroup><optgroup label="'.$continent.'">'; // continent
         }
-        if(isset($city) != ''){
-          if (!empty($subcity) != ''){
+        if($city !== ''){
+          if ($subcity !== ''){
             $city = $city . '/'. $subcity;
           }
           if ($continent != "UTC") {
@@ -116,7 +119,7 @@ function get_tz_options($selectedzone, $label, $desc = '') {
             $structure .= "<option ".(("UTC"==$selectedzone)?'selected="selected "':'')." value=\"UTC\">UTC</option>"; //Timezone
           }
         } else {
-          if (!empty($subcity) != ''){
+          if ($subcity !== ''){
             $city = $city . '/'. $subcity;
           }
           $structure .= "<option ".(($continent==$selectedzone)?'selected="selected "':'')." value=\"".$continent."\">".$continent."</option>"; //Timezone

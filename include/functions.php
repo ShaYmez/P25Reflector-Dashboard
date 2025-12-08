@@ -61,8 +61,8 @@ function getP25ReflectorLog() {
 function getShortP25ReflectorLog() {
 	// Open Logfile and copy loglines into LogLines-Array()
 	$logPath = P25REFLECTORLOGPATH."/".P25REFLECTORLOGPREFIX."-".date("Y-m-d").".log";
-	$logLines = explode("\n", `tail -n1 $logPath`);
-	//$logLines = explode("\n", `egrep -h "Received|watchdog" $logPath | tail -1`);
+	$logLines = explode("\n", shell_exec("tail -n1 " . escapeshellarg($logPath)));
+	//$logLines = explode("\n", shell_exec("egrep -h \"Received|watchdog\" " . escapeshellarg($logPath) . " | tail -1"));
 	return $logLines;
 }
 

@@ -2,12 +2,14 @@
 	$cputemp = NULL;
 	$cpufreq = NULL;
 	if (file_exists ("/sys/class/thermal/thermal_zone0/temp")) {
-		exec("cat /sys/class/thermal/thermal_zone0/temp", $cputemp);
-		$cputemp = $cputemp[0] / 1000;
+		$cputempArray = array();
+		exec("cat /sys/class/thermal/thermal_zone0/temp", $cputempArray);
+		$cputemp = !empty($cputempArray) ? $cputempArray[0] / 1000 : NULL;
 	}
 	if (file_exists ("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq")) {
-		exec("cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq", $cpufreq);
-		$cpufreq = $cpufreq[0] / 1000;
+		$cpufreqArray = array();
+		exec("cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq", $cpufreqArray);
+		$cpufreq = !empty($cpufreqArray) ? $cpufreqArray[0] / 1000 : NULL;
 	}
 	
 	if (defined("TEMPERATUREALERT") && $cputemp > TEMPERATUREHIGHLEVEL && $cputemp !== NULL) {
