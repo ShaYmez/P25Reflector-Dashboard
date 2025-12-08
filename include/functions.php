@@ -2,12 +2,18 @@
 function getP25ReflectorVersion() {
 	// returns creation-time of P25Reflector as version-number
 	$filename = P25REFLECTORPATH."/P25Reflector";
-	exec($filename." -v 2>&1", $output);
-	if (!startsWith(substr($output[0],21,8),"20")) {
+	// Validate file exists and is executable before running command
+	if (!file_exists($filename) || !is_executable($filename)) {
 		return getP25ReflectorFileVersion();
-	} else {
+	}
+	$output = array();
+	exec($filename." -v 2>&1", $output);
+	if (!empty($output) && !startsWith(substr($output[0],21,8),"20")) {
+		return getP25ReflectorFileVersion();
+	} else if (!empty($output)) {
 		return substr($output[0],21,8)." (compiled ".getP25ReflectorFileVersion().")";
 	}
+	return getP25ReflectorFileVersion();
 }
 
 
@@ -61,8 +67,9 @@ function getP25ReflectorLog() {
 function getShortP25ReflectorLog() {
 	// Open Logfile and copy loglines into LogLines-Array()
 	$logPath = P25REFLECTORLOGPATH."/".P25REFLECTORLOGPREFIX."-".date("Y-m-d").".log";
-	$logLines = explode("\n", `tail -n1 $logPath`);
-	//$logLines = explode("\n", `egrep -h "Received|watchdog" $logPath | tail -1`);
+	$result = shell_exec("tail -n1 " . escapeshellarg($logPath));
+	$logLines = $result ? explode("\n", $result) : array();
+	//$logLines = explode("\n", shell_exec("egrep -h \"Received|watchdog\" " . escapeshellarg($logPath) . " | tail -1"));
 	return $logLines;
 }
 
