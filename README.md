@@ -35,6 +35,7 @@ Installation
 4. Provide the requested information (paths, timezone, etc.)
 5. **Important:** Delete `setup.php` after configuration for security
 6. Access your dashboard via `index.php`
+7. **Mega Important** You must set proper permissions to the html directory `sudo chown -R www-data:www-data /var/www/html` before running setup.php
 
 For detailed installation instructions, see `linux-step-by-step.md` in this repository.
 
@@ -44,7 +45,7 @@ Feel free to contact the author by opening a request or issue on this repo.
 
 Changelog
 =========
-### Latest Updates (2024)
+### Latest Updates (v20251208)
 * **PHP 8 Compatibility Optimization**
   - Replaced deprecated backtick execution with `shell_exec()`
   - Removed insecure `extract()` function usage
