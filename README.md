@@ -1,6 +1,9 @@
-# P25Reflector-Dashboard
+# P25Reflector-Dashboard (Deprecated) Archive Only!
 Dashboard for P25Reflector (by G4KLX) forked by M0VUB from NXDNReflector-Dashboard of IU7IGU
 =====================================
+
+## No longer supported
+For a new supported dashboard use [Version 2](https://github.com/ShaYmez/P25Reflector-Dashboard2)
 
 About
 =====
